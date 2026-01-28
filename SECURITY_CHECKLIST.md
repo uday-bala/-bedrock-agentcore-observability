@@ -3,10 +3,10 @@
 ## ✅ Completed Security Measures
 
 ### Sensitive Data Removal
-- [x] Account ID (179138733121) → YOUR_ACCOUNT_ID
-- [x] S3 bucket name (tracing-test-bucket-179138733121) → your-s3-bucket-name  
+- [x] Account ID → YOUR_ACCOUNT_ID
+- [x] S3 bucket names → your-s3-bucket-name  
 - [x] ECR repository URLs → templated versions
-- [x] Region (eu-west-1) → YOUR_REGION
+- [x] Region references → YOUR_REGION
 - [x] ARN references → templated versions
 
 ### Files Sanitized
