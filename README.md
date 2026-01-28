@@ -1,4 +1,4 @@
-# AgentCore V3 Observability Setup
+# Bedrock AgentCore Observability Setup - Simple Example
 
 This repository contains both CDK and Terraform implementations for deploying AWS Bedrock AgentCore with complete observability using ADOT (AWS Distro for OpenTelemetry).
 
