@@ -1,0 +1,137 @@
+InvokeAgentRuntime
+Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore Runtime and receives
+responses in real-time.
+To invoke an agent you must specify the AgentCore Runtime ARN and provide a payload containing
+your request. You can optionally specify a qualifier to target a specific version or endpoint of the
+agent.
+This operation supports streaming responses, allowing you to receive partial responses as they
+become available. We recommend using pagination to ensure that the operation returns quickly
+and successfully when processing large responses.
+For example code, see Invoke an AgentCore Runtime agent.
+If you're integrating your agent with OAuth, you can't use the AWS SDK to call
+InvokeAgentRuntime. Instead, make a HTTPS request to InvokeAgentRuntime. For an
+example, see Authenticate and authorize with Inbound Auth and Outbound Auth.
+To use this operation, you must have the bedrock-agentcore:InvokeAgentRuntime
+permission. If you are making a call to InvokeAgentRuntime on behalf of a user ID
+with the X-Amzn-Bedrock-AgentCore-Runtime-User-Id header, You require
+permissions to both actions (bedrock-agentcore:InvokeAgentRuntime and bedrock-
+agentcore:InvokeAgentRuntimeForUser).
+Request Syntax
+POST /runtimes/agentRuntimeArn/invocations?accountId=accountId&qualifier=qualifier
+HTTP/1.1
+Content-Type: contentType
+Accept: accept
+Mcp-Session-Id: mcpSessionId
+X-Amzn-Bedrock-AgentCore-Runtime-Session-Id: runtimeSessionId
+Mcp-Protocol-Version: mcpProtocolVersion
+X-Amzn-Bedrock-AgentCore-Runtime-User-Id: runtimeUserId
+X-Amzn-Trace-Id: traceId
+traceparent: traceParent
+tracestate: traceState
+baggage: baggage
+payload
+InvokeAgentRuntime API Version 2024-02-28 83
+Amazon Bedrock AgentCore Data Plane API Reference
+URI Request Parameters
+The request uses the following URI parameters.
+accept
+The desired MIME type for the response from the agent runtime. This tells the agent runtime
+what format to use for the response data. Common values include application/json for JSON
+data.
+Length Constraints: Minimum length of 1. Maximum length of 256.
+accountId
+The identifier of the AWS account for the agent runtime resource.
+Pattern: [0-9]{12}
+agentRuntimeArn
+The AWS Resource Name (ARN) of the agent runtime to invoke. The ARN uniquely identifies the
+agent runtime resource in Amazon Bedrock.
+Required: Yes
+baggage
+Additional context information for distributed tracing.
+Length Constraints: Minimum length of 0. Maximum length of 8192.
+contentType
+The MIME type of the input data in the payload. This tells the agent runtime how to interpret
+the payload data. Common values include application/json for JSON data.
+Length Constraints: Minimum length of 1. Maximum length of 256.
+mcpProtocolVersion
+The version of the MCP protocol being used.
+Length Constraints: Minimum length of 1. Maximum length of 1024.
+mcpSessionId
+The identifier of the MCP session.
+URI Request Parameters API Version 2024-02-28 84
+Amazon Bedrock AgentCore Data Plane API Reference
+Length Constraints: Minimum length of 1. Maximum length of 1024.
+qualifier
+The qualifier to use for the agent runtime. This can be a version number or an endpoint name
+that points to a specific version. If not specified, Amazon Bedrock uses the default version of
+the agent runtime.
+runtimeSessionId
+The identifier of the runtime session.
+Length Constraints: Minimum length of 33. Maximum length of 256.
+runtimeUserId
+The identifier of the runtime user.
+Length Constraints: Minimum length of 1. Maximum length of 1024.
+traceId
+The trace identifier for request tracking.
+Length Constraints: Minimum length of 0. Maximum length of 128.
+traceParent
+The parent trace information for distributed tracing.
+Length Constraints: Minimum length of 0. Maximum length of 128.
+traceState
+The trace state information for distributed tracing.
+Length Constraints: Minimum length of 0. Maximum length of 512.
+Request Body
+The request accepts the following binary data.
+payload
+The input data to send to the agent runtime. The format of this data depends on the specific
+agent configuration and must match the specified content type. For most agents, this is a JSON
+object containing the user's request.
+Request Body API Version 2024-02-28 85
+Amazon Bedrock AgentCore Data Plane API Reference
+Length Constraints: Minimum length of 0. Maximum length of 100000000.
+Required: Yes
+Response Syntax
+HTTP/1.1 statusCode
+X-Amzn-Bedrock-AgentCore-Runtime-Session-Id: runtimeSessionId
+Mcp-Session-Id: mcpSessionId
+Mcp-Protocol-Version: mcpProtocolVersion
+X-Amzn-Trace-Id: traceId
+traceparent: traceParent
+tracestate: traceState
+baggage: baggage
+Content-Type: contentType
+response
+Response Elements
+If the action is successful, the service sends back the following HTTP response.
+statusCode
+The HTTP status code of the response. A status code of 200 indicates a successful operation.
+Other status codes indicate various error conditions.
+The response returns the following HTTP headers.
+baggage
+Additional context information for distributed tracing.
+contentType
+The MIME type of the response data. This indicates how to interpret the response data.
+Common values include application/json for JSON data.
+mcpProtocolVersion
+The version of the MCP protocol being used.
+Response Syntax API Version 2024-02-28 86
+Amazon Bedrock AgentCore Data Plane API Reference
+mcpSessionId
+The identifier of the MCP session.
+Length Constraints: Minimum length of 1. Maximum length of 100.
+Pattern: [a-zA-Z0-9][a-zA-Z0-9-_]*
+runtimeSessionId
+The identifier of the runtime session.
+Length Constraints: Minimum length of 1. Maximum length of 100.
+Pattern: [a-zA-Z0-9][a-zA-Z0-9-_]*
+traceId
+The trace identifier for request tracking.
+traceParent
+The parent trace information for distributed tracing.
+traceState
+The trace state information for distributed tracing.
+The response returns the following as the HTTP body.
+response
+The response data from the agent runtime. The format of this data depends on the specific
+agent configuration and the requested accept type. For most agents, this is a JSON object
+containing the agent's response to the user's reques

@@ -1,0 +1,21 @@
+FROM node:18-alpine
+
+# Install Python, pip, AWS CLI, and Docker
+RUN apk add --no-cache python3 py3-pip aws-cli docker
+
+# Install AWS CDK
+RUN npm install -g aws-cdk
+
+# Set working directory
+WORKDIR /app
+
+# Copy project files
+COPY . .
+
+# Create virtual environment and install Python dependencies
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN pip install -r requirements.txt
+
+# Default command
+CMD ["cdk", "--version"]

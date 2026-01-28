@@ -1,0 +1,5 @@
+aws_region      = "YOUR_REGION"
+aws_account_id  = "YOUR_ACCOUNT_ID"
+s3_bucket_name  = "tracing-test-bucket-YOUR_ACCOUNT_ID"
+agent_name      = "my_observability_agent_v3_tf"
+ecr_repository_url = "YOUR_ACCOUNT_ID.dkr.ecr.YOUR_REGION.amazonaws.com/agentcore-v3"
